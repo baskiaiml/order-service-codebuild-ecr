@@ -24,7 +24,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - eval  $(aws ecr get-login-password | sed 's|https://||')
+      - echo $(aws ecr get-login-password)| docker login --password-stdin --username AWS 390368450688.dkr.ecr.ap-south-1.amazonaws.com
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
