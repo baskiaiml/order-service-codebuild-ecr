@@ -20,6 +20,8 @@ phases:
       - docker ps
       - echo $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker image ls
+      - docker images
   post_build:
     commands:
       - echo Build completed on `date`
