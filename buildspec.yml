@@ -8,7 +8,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - aws --version
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION
-      - REPOSITORY_URI=390368450688.dkr.ecr.ap-south-1.amazonaws.com/sampleregistry
+      - REPOSITORY_URI=691879165105.dkr.ecr.us-east-2.amazonaws.com/repo/orderrepo
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
       - echo Image id is $IMAGE_TAG
@@ -26,7 +26,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - echo $(aws ecr get-login-password)| docker login --password-stdin --username AWS 390368450688.dkr.ecr.ap-south-1.amazonaws.com
+      - echo aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 691879165105.dkr.ecr.us-east-2.amazonaws.com
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
